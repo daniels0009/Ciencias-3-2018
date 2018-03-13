@@ -1,14 +1,9 @@
 from pila import *
 from arbol import *
-import sys
 
 cuentaNumeros=0
 aux = 0
 pila = Pila ()
-
-def errorLexico(self,pos):
-    #lista1[pos-1]=">>"+lista1[pos-1]+"<<"
-    return("Error en la siguiente posicion")
         
 def convertir(lista, pila,cuentaNumeros):
     if lista != []:
@@ -54,20 +49,30 @@ def cargarArchivo(nombre):
         lista.append(expresion[:-1])
     return lista
 
+def verificaCaracter(lista):
+    if(lista[-2].isalpha()):
+        return True
+    else:
+        return False
+    
 def ejecutar(lista):
     if lista != []:
-        if(convertir(lista[0],pila,cuentaNumeros)):
+        if(convertir(lista[0],pila,cuentaNumeros) and verificaCaracter(lista[0])):
             print evaluar(pila.desapilar())
+        else:
+            print("error")
         return ejecutar(lista[1:])
+        
     
     
 
 def main ():
-    listaDatos=cargarArchivo("archivo.txt")
+    listaDatos=cargarArchivo("datos.txt")
     ejecutar(listaDatos)
    
     
 if __name__ == "__main__":
     main()
+
 
 
