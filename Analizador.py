@@ -1,6 +1,7 @@
 from pila import *
 from arbol import *
 import sys
+import re
 
 cuentaNumeros=0
 aux = 0
