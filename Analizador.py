@@ -63,7 +63,7 @@ def ejecutar(lista):
     
 
 def main ():
-    listaDatos=cargarArchivo("datos.txt")
+    listaDatos=cargarArchivo("archivo.txt")
     ejecutar(listaDatos)
    
     
