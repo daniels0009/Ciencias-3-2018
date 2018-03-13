@@ -5,7 +5,7 @@ from arbol import *
         
 #Esta función convierte la lista, en una pila.
 def convertir (lista, pila):
-    si lista! = []:
+    if lista != []:
         if lista [0] in "+ - * /": # evalúa los operadores
             nodo_der = pila.desapilar () # Desapila debido a la posfija
             nodo_izq = pila.desapilar () # Desapila debido a la posfija
