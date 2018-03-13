@@ -1,5 +1,6 @@
 from pila import *
 from arbol import *
+import sys
 
 cuentaNumeros=0
 aux = 0
@@ -53,11 +54,20 @@ def cargarArchivo(nombre):
         lista.append(expresion[:-1])
     return lista
 
+def ejecutar(lista):
+    if lista != []:
+        if(convertir(lista[0],pila,cuentaNumeros)):
+            print evaluar(pila.desapilar())
+        return ejecutar(lista[1:])
+    
+    
+
 def main ():
     listaDatos=cargarArchivo("datos.txt")
-    if(convertir(listaDatos[0],pila,cuentaNumeros)):
-        print evaluar(pila.desapilar())
+    ejecutar(listaDatos)
    
     
 if __name__ == "__main__":
     main()
+
+
