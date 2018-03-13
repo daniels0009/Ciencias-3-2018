@@ -1,26 +1,7 @@
 
 # - * - codificación: cp1252 - * -
-clase Pila: #Clase pila
-    def __init __ (self):
-        self.items = []
-
-    def apilar (self, x):
-        self.items.append (x)
-
-    def desapilar (self):
-        tratar:
-            return self.items.pop ()
-        excepto IndexError:
-            elevar ValueError ("La pila está vacía")
-
-    def es_vacia (self):
-        return self.items == []
-
-clase Nodo (): # clase arbol
-    def __init __ (self, val, izq = None, der = None):
-        self.valor = val
-        self.izq = izq
-        self.der = der
+from pila import *
+from arbol import *
         
 #Esta función convierte la lista, en una pila.
 def convertir (lista, pila):
