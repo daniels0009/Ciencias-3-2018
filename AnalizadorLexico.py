@@ -1,49 +1,64 @@
-
-# - * - codificación: cp1252 - * -
 from pila import *
 from arbol import *
+import sys
+
+cuentaNumeros=0
+aux = 0
+pila = Pila ()
+
+def errorLexico(self,pos):
+    #lista1[pos-1]=">>"+lista1[pos-1]+"<<"
+    return("Error en la siguiente posicion")
         
-#Esta función convierte la lista, en una pila.
-def convertir (lista, pila):
+def convertir(lista, pila,cuentaNumeros):
     if lista != []:
-        if lista [0] in "+ - * /": # evalúa los operadores
-            nodo_der = pila.desapilar () # Desapila debido a la posfija
-            nodo_izq = pila.desapilar () # Desapila debido a la posfija
-            pila.apilar (Nodo (lista [0], nodo_izq, nodo_der)) # apila arbol
-        elif lista [0] in "0123456789":
-            imprimir ("entra")
-            valor = lista [0]
-            pila.apilar (Nodo (valor [0]))
-        elif lista [0] in "=":
-            variable = pila.desapilar (). valor
-            variables [variable] = [evaluar (pila.desapilar ())]
-            print (variable + "=" + str (variables [variable] [0]))
+        if lista[0] in "+-*/=":
+            if pila.es_vacia() != True:
+                nodo_der = pila.desapilar()
+            else:
+                return False
+            if pila.es_vacia() != True:
+                nodo_izq = pila.desapilar()
+            else:
+                return False
+            pila.apilar(Nodo(lista[0],nodo_izq,nodo_der))
+            cuentaNumeros=0
         else:
-            pila.apilar (Nodo (lista [0])) # apila nodos
-        return convertir (lista [1:], pila) #recursividad
-    
-#Esta función resuelve el árbol           
-def evaluar (arbol):
+            if cuentaNumeros<2:
+                pila.apilar(Nodo(lista[0]))
+                cuentaNumeros=cuentaNumeros+1
+            else:
+                return False
+        return convertir(lista[1:],pila,cuentaNumeros)
+    return True
+
+def evaluar(arbol):
+    if arbol.valor == "=":
+        resultado =arbol.der.valor+ "=" +str(evaluar(arbol.izq))
+        return resultado
     if arbol.valor == "+":
-        return evaluar (arbol.izq) + evaluar (arbol.der)
+        return evaluar(arbol.izq) + evaluar(arbol.der)
     if arbol.valor == "-":
-        return evaluar (arbol.izq) - evaluar (arbol.der)
+        return evaluar(arbol.izq) - evaluar(arbol.der)
     if arbol.valor == "/":
-        return evaluar (arbol.izq) / evaluar (arbol.der)
+        return evaluar(arbol.izq) / evaluar(arbol.der)
     if arbol.valor == "*":
-        return evaluar (arbol.izq) * evaluar (arbol.der)
-    return int (arbol.valor)
-    
+        return evaluar(arbol.izq) * evaluar(arbol.der)
+    return int(arbol.valor)
+
+def cargarArchivo(nombre):
+    archivo = open(nombre,"r")
+    lista =[]
+    for linea in archivo.readlines():
+        expresion=linea.split(" ")
+        lista.append(expresion[:-1])
+    return lista
+
 def main ():
-    lista = []
-    pila = Pila ()
-    archivo = open ('archivo.txt', 'r')
-    for linea in archivo.readlines ():
-        expresion = linea.split ("")
-        lista.append (expresion)
-    archivo.close ()
-    convertir (lista [0], pila)
+    listaDatos=cargarArchivo("datos.txt")
+    if(convertir(listaDatos[0],pila,cuentaNumeros)):
+        print evaluar(pila.desapilar())
    
     
-si __name__ == "__main__":
+if __name__ == "__main__":
     main()
