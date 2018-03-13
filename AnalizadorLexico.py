@@ -37,7 +37,7 @@ def evaluar (arbol):
 def main ():
     lista = []
     Pila = Pila ()
-    archivo = abrir ('datos.txt', 'r')
+    archivo = abrir ('archivo.txt', 'r')
     para linea en archivo.readlines ():
         expresion = linea.split ("")
         lista.append (expresion)
