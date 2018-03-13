@@ -1,5 +1,6 @@
 from pila import *
 from arbol import *
+import sys
 
 cuentaNumeros=0
 aux = 0
@@ -50,7 +51,7 @@ def cargarArchivo(nombre):
     return lista
 
 def verificaCaracter(lista):
-    if(lista[-2].isalpha()):
+    if(lista[-2].isalpha() and lista[-1]=="="):
         return True
     else:
         return False
@@ -73,6 +74,5 @@ def main ():
     
 if __name__ == "__main__":
     main()
-
 
 
